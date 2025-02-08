@@ -2,12 +2,10 @@ const express = require("express");
 const fetch = require("node-fetch");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
 const API_KEY = "8ff4d074-7832-40b8-8f49-3546ac79fae2"; // ضع مفتاحك هنا
 
 app.get("/", (req, res) => {
-    res.send("Leonardo AI Bot is running...");
+    res.send("✅ Leonardo AI Bot is running on Vercel!");
 });
 
 app.get("/generate", async (req, res) => {
@@ -36,10 +34,9 @@ app.get("/generate", async (req, res) => {
         const data = await response.json();
         res.json({ image_url: data.generations[0].generated_image });
     } catch (error) {
-        res.status(500).json({ error: "حدث خطأ أثناء إنشاء الصورة." });
+        res.status(500).json({ error: "❌ حدث خطأ أثناء إنشاء الصورة." });
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// ❌ لا تستخدم `app.listen()` على Vercel
+module.exports = app;
